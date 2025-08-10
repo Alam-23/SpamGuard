@@ -1,6 +1,6 @@
 # SpamGuard: Dangerous Number Reporting System
 
-![SpamGuard Logo](public/spamguard.png)
+![SpamGuard Logo](public/android-chrome-192x192.png)
 
 ## Description
 **SpamGuard** is a community-driven platform designed to identify and report dangerous phone numbers.  
