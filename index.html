@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <title>SpamGuard - Report & Check Dangerous Numbers</title>
+</head>
+
+<body>
+  <main>
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+      <!-- Header -->
+      <header class="mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center mb-4 md:mb-0">
+            <!-- <i class="fas fa-shield-alt text-3xl text-red-600 mr-3"></i> -->
+             <img src="../spamguard.png" alt="SpamGuard" class="h-15 w-15 mr-3">
+            <h1 class="text-3xl font-bold text-gray-800">SpamGuard</h1>
+          </div>
+          <nav class="flex space-x-2">
+            <button id="nav-list" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center">
+              <i class="fas fa-search mr-2"></i> Search Numbers
+            </button>
+            <button id="nav-add"
+              class="px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 flex items-center">
+              <i class="fas fa-exclamation-triangle mr-2"></i> Report Number
+            </button>
+          </nav>
+        </div>
+        <p class="mt-2 text-gray-600 text-center md:text-left">Protect yourself from scammers, spam callers, and
+          fraudsters</p>
+      </header>
+
+      <!-- List View -->
+      <div id="view-list" class="bg-white rounded-xl p-6 shadow-md">
+        <div id="search-container" class="mb-6"></div>
+        <div id="search-results" class="text-center p-3 text-gray-500">
+          <i class="fas fa-search text-5xl mb-4"></i>
+          <p>Enter a phone number above to check if it has been reported</p>
+        </div>
+        <div id="contacts-list" class="mt-4"></div>
+      </div>
+
+      <!-- Form View -->
+      <div id="view-form" class="hidden bg-white rounded-xl p-6 shadow-md">
+        <h2 id="form-title" class="text-2xl font-semibold mb-6 text-gray-800">Report Dangerous Number</h2>
+        <form id="contact-form" class="space-y-6">
+          <input type="hidden" id="contact-id">
+
+          <div class="space-y-2">
+            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-phone text-gray-400"></i>
+              </div>
+              <input type="tel" id="phone" name="phone"
+                class="pl-10 block w-full border-gray-300 rounded-lg border p-2.5 focus:ring-2 focus:ring-red-600 focus:border-red-600"
+                placeholder="Enter phone number to report" required>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label for="category" class="block text-sm font-medium text-gray-700">Spam Category</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-tag text-gray-400"></i>
+              </div>
+              <select id="category" name="category"
+                class="pl-10 block w-full border-gray-300 rounded-lg border p-2.5 focus:ring-2 focus:ring-red-600 focus:border-red-600"
+                required>
+                <option value="" disabled selected>Select category</option>
+                <option value="scam">Scam/Fraud</option>
+                <option value="spam">Telemarketing/Spam</option>
+                <option value="robocall">Robocall</option>
+                <option value="phishing">Phishing</option>
+                <option value="harassment">Harassment</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <div class="relative">
+              <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
+                <i class="fas fa-comment-alt text-gray-400"></i>
+              </div>
+              <textarea id="description" name="description" rows="3"
+                class="pl-10 block w-full border-gray-300 rounded-lg border p-2.5 focus:ring-2 focus:ring-red-600 focus:border-red-600"
+                placeholder="Describe the scam/spam activity"></textarea>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-3 pt-4">
+            <button type="submit"
+              class="px-6 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">
+              <i class="fas fa-exclamation-circle mr-2"></i> Report Number
+            </button>
+            <button type="button" id="cancel-btn"
+              class="px-6 py-2.5 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300">
+              <i class="fas fa-times mr-2"></i> Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg shadow p-5 text-center">
+          <div class="text-2xl font-bold text-red-600 mb-1">
+            <i class="fas fa-exclamation-circle mr-2"></i>
+            <span id="stats-reported">0</span>
+          </div>
+          <div class="text-sm text-gray-500">Reported Numbers</div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-5 text-center">
+          <div class="text-2xl font-bold text-amber-500 mb-1">
+            <i class="fas fa-shield-alt mr-2"></i>
+            <span id="stats-scams">0</span>
+          </div>
+          <div class="text-sm text-gray-500">Scams Identified</div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-5 text-center">
+          <div class="text-2xl font-bold text-blue-600 mb-1">
+            <i class="fas fa-search mr-2"></i>
+            <span id="stats-searches">0</span>
+          </div>
+          <div class="text-sm text-gray-500">Number Lookups</div>
+        </div>
+      </div>
+
+      <div class="mt-8 p-5 bg-red-50 rounded-lg border border-red-200">
+        <h3 class="text-lg font-semibold text-red-800 mb-2">Stay Safe!</h3>
+        <ul class="list-disc list-inside text-red-700 space-y-1 text-sm">
+          <li>Never share personal information with unknown callers</li>
+          <li>Be suspicious of calls requesting immediate payment</li>
+          <li>Government agencies never ask for gift cards or wire transfers</li>
+          <li>If unsure, hang up and call the organization directly using their official number</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-auto py-6 bg-gray-100">
+    <div class="container mx-auto px-4 text-center text-gray-500">
+      <p>© 2025 SpamGuard. All rights reserved. Report dangerous numbers to protect others.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
