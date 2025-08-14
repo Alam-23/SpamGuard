@@ -48,20 +48,14 @@ Built as a protective tool against **phone scams, spam calls, and fraudulent act
 ### Installation
 Clone the repository:
 ```bash
-git clone https://github.com/username/SpamGuard.git
+git clone https://github.com/Alam-23/SpamGuard.git 
 ```
 Navigate to the project directory:
 ```bash
 cd SpamGuard
 ```
 For local development
-
-Using VS Code:
-
-- Install the Live Server extension.
-- Click "Go Live".
-
-Using npm:
+Install dependencies:
 ``` bash
 npm install
 npm run preview
@@ -75,16 +69,13 @@ npm run preview
 ---
 
 ## 🤖 AI Support Explanation
-This project was developed with AI assistance from **GitHub Copilot**, which helped with:
+This project was developed with AI assistance from **IBM GRANITE**, which helped with:
 
 - **Code Generation:** Application structure, component templates, and JavaScript functions.
 - **Styling Suggestions:** Responsive design with Tailwind CSS.
 - **Bug Identification:** Detecting potential issues in the code.
 - **Refactoring:** Improving code organization and maintainability.
 - **Feature Implementation:** Search and report submission functionality.
-
-The **core architecture decisions and concept** were human-directed, with AI providing implementation assistance and best-practice suggestions.  
-This collaboration enabled **rapid development** while maintaining high code quality and user-focused design.
 
 ---
 
